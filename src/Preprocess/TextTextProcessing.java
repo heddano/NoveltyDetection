@@ -17,6 +17,8 @@ public class TextTextProcessing {
 				"The quick brown fox  $$ jumps over the lazy dog mating ocurring");
 
 		List<String> temporaryListOfTerms = new Vector<String>();
+		
+		
 
 		TextPreprocessing textProcessor = new TextPreprocessing();
 		textProcessor.loadListOfStopWords("/users/Hedda/NoveltyDetection/src/Preprocess/stopwords");

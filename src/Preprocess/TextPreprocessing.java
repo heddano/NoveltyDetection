@@ -109,7 +109,7 @@ public class TextPreprocessing {
 	public void loadListOfStopWords(String filePath) {
 		try {
 			// open the file using the path defined in filePath parameter
-			FileInputStream fileInputStream = new FileInputStream(filePath);
+			FileInputStream fileInputStream = new FileInputStream("/users/Hedda/NoveltyDetection/src/Preprocess/stopwords");
 			// get the object of DataInputStream
 			DataInputStream in = new DataInputStream(fileInputStream);
 			BufferedReader bufferedReader = new BufferedReader(
@@ -139,7 +139,7 @@ public class TextPreprocessing {
 	 */
 	public static String preProcessText(String sourceText) {
 		TextPreprocessing textProcessor = new TextPreprocessing();
-		textProcessor.loadListOfStopWords("input/english.stopwords.txt");
+		textProcessor.loadListOfStopWords("/users/Hedda/NoveltyDetection/src/Preprocess/stopwords");
 		if (sourceText == null) {
 			sourceText = "";
 		}
