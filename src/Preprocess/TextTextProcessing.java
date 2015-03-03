@@ -14,19 +14,17 @@ public class TextTextProcessing {
 	 */
 	public static void main(String[] args) {
 		String string = new String(
-				"The quick brown fox jumps over the lazy dog mating ocurring");
+				"The quick brown fox  $$ jumps over the lazy dog mating ocurring");
 
 		List<String> temporaryListOfTerms = new Vector<String>();
 
 		TextPreprocessing textProcessor = new TextPreprocessing();
-		textProcessor
-				.loadListOfStopWords("resources/stopwords/english.stopwords.txt");
+		textProcessor.loadListOfStopWords("/users/Hedda/NoveltyDetection/src/Preprocess/stopwords");
 
 		temporaryListOfTerms = textProcessor.removeStopWords(string);
 
 		System.out.println("After stop words removing:");
-		for (Iterator<String> iterator = temporaryListOfTerms.iterator(); iterator
-				.hasNext();) {
+		for (Iterator<String> iterator = temporaryListOfTerms.iterator(); iterator.hasNext();) {
 			String term = (String) iterator.next();
 			System.out.println(term);
 		}
