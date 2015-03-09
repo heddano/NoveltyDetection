@@ -21,8 +21,13 @@ public class TextTextProcessing {
 		
 
 		TextPreprocessing textProcessor = new TextPreprocessing();
+		
+//		System.out.println("After removing of non letter characters: ");
+//		System.out.println(string);
+		
 		textProcessor.loadListOfStopWords("/users/Hedda/NoveltyDetection/src/Preprocess/stopwords");
-
+		
+		
 		temporaryListOfTerms = textProcessor.removeStopWords(string);
 
 		System.out.println("After stop words removing:");
@@ -31,8 +36,7 @@ public class TextTextProcessing {
 			System.out.println(term);
 		}
 
-		String resultingListOfTerms = textProcessor
-				.applyPorterStemmer(temporaryListOfTerms);
+		String resultingListOfTerms = textProcessor.applyPorterStemmer(temporaryListOfTerms);
 
 		System.out.println("After Porter stemming:");
 		for (String term : resultingListOfTerms.split(" ")) {

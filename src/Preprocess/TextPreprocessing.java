@@ -11,12 +11,14 @@ import java.util.Vector;
 public class TextPreprocessing {
 
 	private List<String> listOfStopWords;
+	
 
 	/**
 	 * Default constructor method.
 	 */
 	public TextPreprocessing() {
 		listOfStopWords = new Vector<String>();
+		
 	}
 
 	/**
@@ -109,11 +111,10 @@ public class TextPreprocessing {
 	public void loadListOfStopWords(String filePath) {
 		try {
 			// open the file using the path defined in filePath parameter
-			FileInputStream fileInputStream = new FileInputStream("/users/Hedda/NoveltyDetection/src/Preprocess/stopwords");
+			FileInputStream fileInputStream = new FileInputStream(filePath);
 			// get the object of DataInputStream
 			DataInputStream in = new DataInputStream(fileInputStream);
-			BufferedReader bufferedReader = new BufferedReader(
-					new InputStreamReader(in));
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
 			String stringLine;
 			// read the file line by line
 			while ((stringLine = bufferedReader.readLine()) != null) {
