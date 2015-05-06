@@ -17,13 +17,14 @@ public class JaccardCoefficient {
         for (int i = 0; i < keyList.size(); i++) {
             for (int j = i+1; j < keyList.size(); j++) {
                 List<String> content1 = (List<String>) documents.get(keyList.get(i));
+
+
                 List<String> content2 = (List<String>) documents.get(keyList.get(j));
 
 
                 double jaccardCoefficient = getJaccardCoefficient(content1, content2);
-                if(jaccardCoefficient<0.002){
+                if(jaccardCoefficient<1){
                     jaccard.put(keyList.get(i) + "+" + keyList.get(j), jaccardCoefficient);
-                    System.out.println(k);
                     k++;
                 }
             }

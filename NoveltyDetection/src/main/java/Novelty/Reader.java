@@ -1,6 +1,9 @@
 package Novelty;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.io.FileReader;
@@ -43,10 +46,9 @@ public class Reader {
     private Hashtable getDocumentsAsHashtable(String content){
         List<String> listOfDocuments = splitBetweenDocs(content);
 
-        //Collections.reverse(listOfDocuments);
-
         for (int i = 1; i < listOfDocuments.size(); i++) {
-            document.put(getDocNo(listOfDocuments.get(i)), listOfDocuments.get(i));
+
+            document.put(getDocNo(listOfDocuments.get(i)), getText(listOfDocuments.get(i)));
         }
         return document;
     }
@@ -63,6 +65,15 @@ public class Reader {
 
     private String getDocNo (String content){
         String substring = StringUtils.substringBetween(content, "<DOCNO>", "</DOCNO>");
+        substring = substring.replaceAll("\n", "");
         return substring;
+    }
+
+    private String getText(String text){
+
+        Document doc = Jsoup.parse(text);
+        Elements textText = doc.select("text");
+
+        return textText.toString();
     }
 }

@@ -9,7 +9,6 @@ public class Preprocessing {
     Stopwords stopwords = new Stopwords();
     SnowballStemmer stemmer = new SnowballStemmer("english");
     Hashtable<String, List<String>> preprocessedDocuments = new Hashtable<String, List<String>>();
-    List<String> terms = new ArrayList<String>();
 
     public Preprocessing(){ }
 
@@ -33,18 +32,25 @@ public class Preprocessing {
         List<String> sentenceList = new ArrayList<String>();
 
         String[] contentSplit = sentence
-                .toString().replaceAll("[-/(){},.;!?%`´'\\n]", "")
+                .toString().replaceAll("[-/(){},.;!?%`´'_]", "")
                 .replaceAll("[<>]", " ")
+                .replaceAll("\n", " ")
+                .replaceAll("     ", " ")
+                .replaceAll("    ", " ")
+                .replaceAll("   ", " ")
+                .replaceAll("  ", " ")
                 .toLowerCase().split(" ");
         for (int i = 0; i < contentSplit.length; i++) {
             sentenceList.add(contentSplit[i]);
         }
         sentenceList = removeStopwords(sentenceList);
-        sentenceList = stem(sentenceList);
+        sentenceList = porterStemmer(sentenceList);
 
         if(isJaccard == true){
             sentenceList = removeDuplicates(sentenceList);
         }
+        sentenceList.remove("");
+        sentenceList.remove(" ");
         return sentenceList;
     }
 
@@ -58,6 +64,10 @@ public class Preprocessing {
         stopwords.add("head");
         stopwords.add("byline");
         stopwords.add("dateline");
+        stopwords.add("note");
+        stopwords.add("so");
+        stopwords.add("co");
+        stopwords.add("g");
 
         List<String> stopList = new ArrayList<String>();
         String[] stopSplit = stopwords.toString().split(",");
@@ -106,7 +116,7 @@ public class Preprocessing {
         return content;
     }
 
-    private List<String> stem(List<String> content){
+    private List<String> snowballStemmer(List<String> content){
         List<String> stemmedContent = new ArrayList<String>();
 
         for (int i = 0; i < content.size(); i++) {
@@ -114,5 +124,21 @@ public class Preprocessing {
             stemmedContent.add(stemmedWord);
         }
         return stemmedContent;
+    }
+
+    private List<String> porterStemmer(List<String> words){
+        List<String> stemmedWords = new ArrayList<String>();
+
+        for(String word : words){
+            Porterstemmer porterstemmer = new Porterstemmer();
+            for (int i = 0; i < word.length(); i++) {
+                char c = word.charAt(i);
+                porterstemmer.add(c);
+            }
+            porterstemmer.stem();
+            stemmedWords.add(porterstemmer.toString());
+        }
+
+        return stemmedWords;
     }
 }

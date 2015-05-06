@@ -29,5 +29,7 @@
     <orderEntry type="library" name="nz.ac.waikato.cms.weka:weka-dev:3.7.12" level="project" />
     <orderEntry type="library" name="com.github.fracpete:snowball-stemmers-weka-package:1.0.0" level="project" />
     <orderEntry type="library" name="ext" level="project" />
+    <orderEntry type="library" name="gov.sandia.foundry:porter-stemmer:1.4" level="project" />
+    <orderEntry type="library" name="org.jsoup:jsoup:1.7.2" level="project" />
   </component>
 </module>
